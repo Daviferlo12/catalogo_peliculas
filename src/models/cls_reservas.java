@@ -4,6 +4,15 @@
  */
 package models;
 
+import conection.con_DB;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author davif
@@ -16,6 +25,10 @@ public class cls_reservas {
     String fecha_inicio;
     String fecha_fin;
     int estado;
+    
+    // DB INSTANCE
+    con_DB conn = new con_DB();
+    
 
     public int getReserva_id() {
         return reserva_id;
@@ -73,5 +86,95 @@ public class cls_reservas {
         this.estado = estado;
     }
     
+    
+    public void mostrar_revervas_activas(JTable tabla_reservas){
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        
+        TableRowSorter<TableModel> ordenar_tabla = new TableRowSorter<>(modelo);
+        tabla_reservas.setRowSorter(ordenar_tabla);
+        
+        String query = "";
+        
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Contenido");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Estado");
+        
+        query = "SELECT us.nombre, ca.titulo, re.fecha_reserva, re.estado FROM reservas re "
+                + "INNER JOIN usuarios us ON re.id_usuario = us.usuario_id "
+                + "INNER JOIN catalogo ca ON re.id_contenido = ca.catalogo_id WHERE re.estado = 1;";
+        
+        tabla_reservas.setModel(modelo);
+        
+        String[] datos = new String[4];
+        Statement st;
+        
+        try {
+            
+            st = conn.establishConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                
+                modelo.addRow(datos);
+            }
+            
+            tabla_reservas.setModel(modelo);
+            System.err.println("Datos de la tabla cargados");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al llamar los datos de la tabla, ERROR: "+ e.toString());
+        }
+    }
+    
+     public void mostrar_revervas_all(JTable tabla_reservas){
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        
+        
+        TableRowSorter<TableModel> ordenar_tabla = new TableRowSorter<>(modelo);
+        tabla_reservas.setRowSorter(ordenar_tabla);
+        
+        String query = "";
+        
+        modelo.addColumn("Usuario");
+        modelo.addColumn("Contenido");
+        modelo.addColumn("Fecha");
+        modelo.addColumn("Estado");
+        
+        query = "SELECT us.nombre, ca.titulo, re.fecha_reserva, re.estado FROM reservas re "
+                + "INNER JOIN usuarios us ON re.id_usuario = us.usuario_id "
+                + "INNER JOIN catalogo ca ON re.id_contenido = ca.catalogo_id;";
+        
+        tabla_reservas.setModel(modelo);
+        
+        String[] datos = new String[4];
+        Statement st;
+        
+        try {
+            
+            st = conn.establishConnection().createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                datos[0] = rs.getString(1);
+                datos[1] = rs.getString(2);
+                datos[2] = rs.getString(3);
+                datos[3] = rs.getString(4);
+                
+                modelo.addRow(datos);
+            }
+            
+            tabla_reservas.setModel(modelo);
+            System.err.println("Datos de la tabla cargados");
+            
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al llamar los datos de la tabla, ERROR: "+ e.toString());
+        }
+    }
     
 }

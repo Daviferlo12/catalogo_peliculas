@@ -4,6 +4,8 @@
  */
 package catalogo_peliculas_p;
 
+import models.cls_reservas;
+
 /**
  *
  * @author davif
@@ -13,8 +15,15 @@ public class main extends javax.swing.JFrame {
     /**
      * Creates new form main
      */
+    
+    cls_reservas reservas = new cls_reservas();
+    
     public main() {
         initComponents();
+        this.setLocationRelativeTo(this);
+        
+        //mostrar reservas activas
+        reservas.mostrar_revervas_activas(table_catalogo);
     }
 
     /**
@@ -38,8 +47,8 @@ public class main extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        meni_item_usuarios = new javax.swing.JMenu();
+        menu_item_contenidos = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 0, 0));
@@ -47,36 +56,22 @@ public class main extends javax.swing.JFrame {
         table_catalogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         table_catalogo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Cod", "Usuario", "Titulo", "Fecha Reserva"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(table_catalogo);
 
         btn_salir.setBackground(new java.awt.Color(153, 0, 0));
         btn_salir.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         btn_salir.setForeground(new java.awt.Color(255, 255, 255));
         btn_salir.setText("Salir");
+        btn_salir.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 0), 2, true));
         btn_salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_salirActionPerformed(evt);
@@ -84,7 +79,12 @@ public class main extends javax.swing.JFrame {
         });
 
         btn_reservas.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
-        btn_reservas.setText("Reservar");
+        btn_reservas.setText("Gestionar Reservas");
+        btn_reservas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_reservasActionPerformed(evt);
+            }
+        });
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/esto_es_cine (3).jpeg"))); // NOI18N
         jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 0, 0), 4));
@@ -114,7 +114,7 @@ public class main extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(7, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -145,11 +145,21 @@ public class main extends javax.swing.JFrame {
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jMenu1.setText("Usuarios");
-        jMenuBar1.add(jMenu1);
+        meni_item_usuarios.setText("Usuarios");
+        meni_item_usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                meni_item_usuariosActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(meni_item_usuarios);
 
-        jMenu2.setText("Contenido");
-        jMenuBar1.add(jMenu2);
+        menu_item_contenidos.setText("Contenido");
+        menu_item_contenidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_item_contenidosActionPerformed(evt);
+            }
+        });
+        jMenuBar1.add(menu_item_contenidos);
 
         setJMenuBar(jMenuBar1);
 
@@ -160,7 +170,7 @@ public class main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btn_reservas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btn_salir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -172,19 +182,17 @@ public class main extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(38, 38, 38)
                         .addComponent(btn_reservas)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_salir)
-                        .addGap(14, 14, 14)))
-                .addGap(18, 18, 18)
+                        .addGap(20, 20, 20)
+                        .addComponent(btn_salir))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -195,6 +203,21 @@ public class main extends javax.swing.JFrame {
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_btn_salirActionPerformed
+
+    private void btn_reservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reservasActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        gestion_reservas reserv = new gestion_reservas();
+        reserv.setVisible(true);
+    }//GEN-LAST:event_btn_reservasActionPerformed
+
+    private void meni_item_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meni_item_usuariosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_meni_item_usuariosActionPerformed
+
+    private void menu_item_contenidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_item_contenidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menu_item_contenidosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,12 +262,12 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu meni_item_usuarios;
+    private javax.swing.JMenu menu_item_contenidos;
     private javax.swing.JTable table_catalogo;
     // End of variables declaration//GEN-END:variables
 }
