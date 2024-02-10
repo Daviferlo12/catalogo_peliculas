@@ -4,6 +4,9 @@
  */
 package catalogo_peliculas_p;
 
+import models.cargar_combos;
+import models.cls_reservas;
+
 /**
  *
  * @author davif
@@ -13,9 +16,17 @@ public class gestion_reservas extends javax.swing.JFrame {
     /**
      * Creates new form gestion_reservas
      */
+    
+    cls_reservas reserva = new cls_reservas();
+    cargar_combos combos = new cargar_combos();
+    
     public gestion_reservas() {
         initComponents();
         this.setLocationRelativeTo(this);
+        
+        reserva.mostrar_revervas_all(table_reservas_all);
+        combos.rellenar_combo("usuarios", "nombre", combo_usuarios);
+        combos.rellenar_combo_SinRepetir("catalogo", "titulo", combo_contenido);
     }
 
     /**
@@ -34,10 +45,10 @@ public class gestion_reservas extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
+        btn_actualizar = new javax.swing.JButton();
+        btn_volver = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         combo_usuarios = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
@@ -103,22 +114,42 @@ public class gestion_reservas extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setText("Eliminar");
+        btn_eliminar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_eliminar.setText("Eliminar");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Modificar");
+        btn_actualizar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_actualizar.setText("Modificar");
+        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_actualizarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton4.setText("Volver");
+        btn_volver.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_volver.setText("Volver");
+        btn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_volverActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setText("Guardar");
+        btn_guardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_guardar.setText("Guardar");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel2.setText("Usuario");
@@ -135,6 +166,8 @@ public class gestion_reservas extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel7.setText("Fecha Reserva");
 
+        input_fecha_reserva.setDateFormatString("YYYY-MM-DD");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -142,13 +175,13 @@ public class gestion_reservas extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
+                    .addComponent(btn_volver)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btn_guardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btn_actualizar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3))
+                        .addComponent(btn_eliminar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7)
@@ -178,11 +211,11 @@ public class gestion_reservas extends javax.swing.JFrame {
                     .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(btn_guardar)
+                    .addComponent(btn_actualizar)
+                    .addComponent(btn_eliminar))
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btn_volver)
                 .addGap(14, 14, 14))
         );
 
@@ -200,6 +233,11 @@ public class gestion_reservas extends javax.swing.JFrame {
 
             }
         ));
+        table_reservas_all.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_reservas_allMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_reservas_all);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -208,7 +246,7 @@ public class gestion_reservas extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 425, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -236,7 +274,7 @@ public class gestion_reservas extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -250,6 +288,37 @@ public class gestion_reservas extends javax.swing.JFrame {
     private void combo_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_usuariosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_usuariosActionPerformed
+
+    private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+        main pricipal = new main();
+        pricipal.setVisible(true);
+    }//GEN-LAST:event_btn_volverActionPerformed
+
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        // TODO add your handling code here:
+        reserva.insertar_reserva(combo_usuarios, combo_contenido, input_fecha_reserva);
+        reserva.mostrar_revervas_all(table_reservas_all);
+    }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void table_reservas_allMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_reservas_allMouseClicked
+        // TODO add your handling code here:
+        reserva.seleccionar_reserva(table_reservas_all, combo_usuarios, combo_contenido, input_fecha_reserva);
+    }//GEN-LAST:event_table_reservas_allMouseClicked
+
+    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
+        // TODO add your handling code here:
+        reserva.modificar_reserva(combo_usuarios, combo_contenido, input_fecha_reserva);
+        reserva.mostrar_revervas_all(table_reservas_all);
+    }//GEN-LAST:event_btn_actualizarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        // TODO add your handling code here:
+        reserva.eliminar_reserva(combo_usuarios, combo_contenido);
+        reserva.mostrar_revervas_all(table_reservas_all);
+    }//GEN-LAST:event_btn_eliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -287,13 +356,13 @@ public class gestion_reservas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_actualizar;
+    private javax.swing.JButton btn_eliminar;
+    private javax.swing.JButton btn_guardar;
+    private javax.swing.JButton btn_volver;
     private javax.swing.JComboBox<String> combo_contenido;
     private javax.swing.JComboBox<String> combo_usuarios;
     private com.toedter.calendar.JDateChooser input_fecha_reserva;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

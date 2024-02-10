@@ -4,6 +4,9 @@
  */
 package catalogo_peliculas_p;
 
+import models.cargar_combos;
+import models.cls_catalogo;
+
 /**
  *
  * @author habi
@@ -13,9 +16,18 @@ public class form_create_contenido extends javax.swing.JFrame {
     /**
      * Creates new form form_create_contenido
      */
+    
+    cls_catalogo catalogo = new cls_catalogo();
+    cargar_combos combos = new cargar_combos();
+    
+    
     public form_create_contenido() {
         initComponents();
         this.setLocationRelativeTo(this);
+        
+        catalogo.mostrar_contenido(table_contenido_all);
+        combos.rellenar_combo("generos", "nombre_genero", combo_genero);
+        combos.rellenar_combo("directores", "nombre_director", combo_directores);
     }
 
     /**
@@ -48,7 +60,7 @@ public class form_create_contenido extends javax.swing.JFrame {
         combo_directores = new javax.swing.JComboBox<>();
         input_anio_lans = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        input_temporadas = new javax.swing.JTextField();
         lbl_tempo = new javax.swing.JLabel();
         input_duracion = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
@@ -69,7 +81,7 @@ public class form_create_contenido extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Usuarios");
+        jLabel1.setText("Catalogo");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -125,15 +137,35 @@ public class form_create_contenido extends javax.swing.JFrame {
 
         btn_eliminar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_eliminar.setText("Eliminar");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
 
         btn_actualizar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_actualizar.setText("Modificar");
+        btn_actualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_actualizarActionPerformed(evt);
+            }
+        });
 
         btn_volver.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_volver.setText("Volver");
+        btn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_volverActionPerformed(evt);
+            }
+        });
 
         btn_guardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btn_guardar.setText("Guardar");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel2.setText("Titulo");
@@ -152,8 +184,8 @@ public class form_create_contenido extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel9.setText("Año lanzamiento");
 
-        jTextField5.setActionCommand("<Not Set>");
-        jTextField5.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        input_temporadas.setActionCommand("<Not Set>");
+        input_temporadas.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         lbl_tempo.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         lbl_tempo.setText("Temporadas");
@@ -167,7 +199,7 @@ public class form_create_contenido extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel12.setText("Disponibilidad");
 
-        combo_disponible.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Si", "NO" }));
+        combo_disponible.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No", "Si" }));
 
         jLabel13.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel13.setText("Descripcion");
@@ -228,7 +260,7 @@ public class form_create_contenido extends javax.swing.JFrame {
                                         .addComponent(combo_tipo_c, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(input_titulo)
                                         .addComponent(input_anio_lans)
-                                        .addComponent(jTextField5)
+                                        .addComponent(input_temporadas)
                                         .addComponent(input_duracion, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(jPanel3Layout.createSequentialGroup()
                                     .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,12 +294,12 @@ public class form_create_contenido extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_tempo)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(input_temporadas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel13)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(input_duracion_por_ep, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel14))
@@ -278,16 +310,19 @@ public class form_create_contenido extends javax.swing.JFrame {
                         .addGap(52, 52, 52))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(input_duracion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(combo_disponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))))
-                .addGap(18, 18, 18)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel12))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(combo_disponible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_guardar)
                     .addComponent(btn_actualizar)
                     .addComponent(btn_eliminar))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btn_volver)
                 .addGap(14, 14, 14))
         );
@@ -306,6 +341,11 @@ public class form_create_contenido extends javax.swing.JFrame {
 
             }
         ));
+        table_contenido_all.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_contenido_allMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_contenido_all);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -314,7 +354,7 @@ public class form_create_contenido extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 645, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -352,6 +392,37 @@ public class form_create_contenido extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+        main principal = new main();
+        principal.setVisible(true);
+    }//GEN-LAST:event_btn_volverActionPerformed
+
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        // TODO add your handling code here:
+        catalogo.insertar_catalogo(input_titulo, combo_tipo_c, combo_genero, combo_directores, input_anio_lans, input_temporadas, txt_descripcion, input_duracion_por_ep, input_duracion, combo_disponible);
+        catalogo.mostrar_contenido(table_contenido_all);
+    }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
+        // TODO add your handling code here:
+        catalogo.modificar_reserva(input_titulo, combo_tipo_c, combo_genero, combo_directores, input_anio_lans, input_temporadas, txt_descripcion, input_duracion_por_ep, input_duracion, combo_disponible);
+        catalogo.mostrar_contenido(table_contenido_all);
+    }//GEN-LAST:event_btn_actualizarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        // TODO add your handling code here:
+        catalogo.eliminar_reserva(input_titulo, combo_directores);
+        catalogo.mostrar_contenido(table_contenido_all);
+    }//GEN-LAST:event_btn_eliminarActionPerformed
+
+    private void table_contenido_allMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_contenido_allMouseClicked
+        // TODO add your handling code here:
+        catalogo.seleccionar_contenido(table_contenido_all, input_titulo, combo_tipo_c, combo_genero, combo_directores, input_anio_lans, input_temporadas, txt_descripcion, input_duracion_por_ep, input_duracion, combo_disponible);
+    }//GEN-LAST:event_table_contenido_allMouseClicked
 
     /**
      * @param args the command line arguments
@@ -400,6 +471,7 @@ public class form_create_contenido extends javax.swing.JFrame {
     private javax.swing.JTextField input_anio_lans;
     private javax.swing.JTextField input_duracion;
     private javax.swing.JTextField input_duracion_por_ep;
+    private javax.swing.JTextField input_temporadas;
     private javax.swing.JTextField input_titulo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -420,7 +492,6 @@ public class form_create_contenido extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField5;
     private javax.swing.JLabel lbl_tempo;
     private javax.swing.JTable table_contenido_all;
     private javax.swing.JTextArea txt_descripcion;

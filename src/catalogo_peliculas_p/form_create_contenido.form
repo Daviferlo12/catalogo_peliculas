@@ -86,7 +86,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Usuarios"/>
+            <Property name="text" type="java.lang.String" value="Catalogo"/>
           </Properties>
         </Component>
       </SubComponents>
@@ -215,7 +215,7 @@
                                           <Component id="combo_tipo_c" alignment="0" max="32767" attributes="0"/>
                                           <Component id="input_titulo" alignment="1" max="32767" attributes="0"/>
                                           <Component id="input_anio_lans" max="32767" attributes="0"/>
-                                          <Component id="jTextField5" max="32767" attributes="0"/>
+                                          <Component id="input_temporadas" max="32767" attributes="0"/>
                                           <Component id="input_duracion" min="-2" pref="228" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -263,14 +263,14 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="lbl_tempo" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="input_temporadas" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="26" max="32767" attributes="0"/>
+                  <EmptySpace pref="49" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="input_duracion_por_ep" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -283,20 +283,25 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="input_duracion" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="combo_disponible" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                                  <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="combo_disponible" min="-2" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btn_guardar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_actualizar" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btn_eliminar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="btn_volver" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               </Group>
@@ -311,6 +316,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Eliminar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_eliminarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_actualizar">
           <Properties>
@@ -319,6 +327,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Modificar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_actualizarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_volver">
           <Properties>
@@ -327,6 +338,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Volver"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_volverActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btn_guardar">
           <Properties>
@@ -335,6 +349,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_guardarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -414,7 +431,7 @@
             <Property name="text" type="java.lang.String" value="A&#xf1;o lanzamiento"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField5">
+        <Component class="javax.swing.JTextField" name="input_temporadas">
           <Properties>
             <Property name="actionCommand" type="java.lang.String" value="&lt;Not Set&gt;"/>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
@@ -458,8 +475,8 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
-                <StringItem index="0" value="Si"/>
-                <StringItem index="1" value="NO"/>
+                <StringItem index="0" value="No"/>
+                <StringItem index="1" value="Si"/>
               </StringArray>
             </Property>
           </Properties>
@@ -522,7 +539,7 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="495" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="645" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -556,6 +573,9 @@
                   <Table columnCount="0" rowCount="4"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="table_contenido_allMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

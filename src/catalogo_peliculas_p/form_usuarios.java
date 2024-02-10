@@ -4,6 +4,8 @@
  */
 package catalogo_peliculas_p;
 
+import models.cls_usuarios;
+
 /**
  *
  * @author habi
@@ -13,9 +15,12 @@ public class form_usuarios extends javax.swing.JFrame {
     /**
      * Creates new form form_usuarios
      */
+    cls_usuarios usuarios = new cls_usuarios();
+    
     public form_usuarios() {
         initComponents();
         this.setLocationRelativeTo(this);
+        usuarios.mostrar_usuario_all(table_usuarios_all);
     }
 
     /**
@@ -34,16 +39,16 @@ public class form_usuarios extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btn_eliminar = new javax.swing.JButton();
+        btn_modificar = new javax.swing.JButton();
+        btn_volver = new javax.swing.JButton();
+        btn_guardar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        input_correo = new javax.swing.JTextField();
+        input_nombre = new javax.swing.JTextField();
+        combo_genero = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_usuarios_all = new javax.swing.JTable();
@@ -108,17 +113,37 @@ public class form_usuarios extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
 
-        jButton3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton3.setText("Eliminar");
+        btn_eliminar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_eliminar.setText("Eliminar");
+        btn_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_eliminarActionPerformed(evt);
+            }
+        });
 
-        jButton1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton1.setText("Modificar");
+        btn_modificar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_modificar.setText("Modificar");
+        btn_modificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_modificarActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton4.setText("Volver");
+        btn_volver.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_volver.setText("Volver");
+        btn_volver.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_volverActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jButton2.setText("Guardar");
+        btn_guardar.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_guardar.setText("Guardar");
+        btn_guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_guardarActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel2.setText("Nombre");
@@ -129,7 +154,7 @@ public class form_usuarios extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         jLabel7.setText("Genero");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----", "Masculino", "Femenino", "Prefiero no decir..." }));
+        combo_genero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "----", "Masculino", "Femenino", "Prefiero no decir..." }));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -138,13 +163,13 @@ public class form_usuarios extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(55, 55, 55)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton4)
+                    .addComponent(btn_volver)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(btn_guardar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)
+                        .addComponent(btn_modificar)
                         .addGap(16, 16, 16)
-                        .addComponent(jButton3))
+                        .addComponent(btn_eliminar))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7)
@@ -152,9 +177,9 @@ public class form_usuarios extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(input_correo)
+                            .addComponent(input_nombre, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                            .addComponent(combo_genero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -163,22 +188,22 @@ public class form_usuarios extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(input_nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(input_correo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo_genero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(btn_guardar)
+                    .addComponent(btn_modificar)
+                    .addComponent(btn_eliminar))
                 .addGap(18, 18, 18)
-                .addComponent(jButton4)
+                .addComponent(btn_volver)
                 .addGap(14, 14, 14))
         );
 
@@ -196,6 +221,11 @@ public class form_usuarios extends javax.swing.JFrame {
 
             }
         ));
+        table_usuarios_all.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                table_usuarios_allMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(table_usuarios_all);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -242,6 +272,37 @@ public class form_usuarios extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        
+        main principal = new main();
+        principal.setVisible(true);
+    }//GEN-LAST:event_btn_volverActionPerformed
+
+    private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarActionPerformed
+        // TODO add your handling code here:
+        usuarios.save_user_from_form(input_nombre, input_correo, combo_genero, "1234");
+        usuarios.mostrar_usuario_all(table_usuarios_all);
+    }//GEN-LAST:event_btn_guardarActionPerformed
+
+    private void btn_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_modificarActionPerformed
+        // TODO add your handling code here:
+        usuarios.modificar_usuario(input_correo, input_correo, combo_genero);
+        usuarios.mostrar_usuario_all(table_usuarios_all);
+    }//GEN-LAST:event_btn_modificarActionPerformed
+
+    private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
+        // TODO add your handling code here:
+        usuarios.eliminar_usuario(input_nombre, input_correo);
+        usuarios.mostrar_usuario_all(table_usuarios_all);
+    }//GEN-LAST:event_btn_eliminarActionPerformed
+
+    private void table_usuarios_allMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_usuarios_allMouseClicked
+        // TODO add your handling code here:
+        usuarios.seleccionar_usuario(table_usuarios_all, input_nombre, input_correo, combo_genero);
+    }//GEN-LAST:event_table_usuarios_allMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -278,11 +339,13 @@ public class form_usuarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JButton btn_eliminar;
+    private javax.swing.JButton btn_guardar;
+    private javax.swing.JButton btn_modificar;
+    private javax.swing.JButton btn_volver;
+    private javax.swing.JComboBox<String> combo_genero;
+    private javax.swing.JTextField input_correo;
+    private javax.swing.JTextField input_nombre;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -295,8 +358,6 @@ public class form_usuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTable table_usuarios_all;
     // End of variables declaration//GEN-END:variables
 }

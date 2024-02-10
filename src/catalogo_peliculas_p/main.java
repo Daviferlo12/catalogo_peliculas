@@ -46,9 +46,8 @@ public class main extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        meni_item_usuarios = new javax.swing.JMenu();
-        menu_item_contenidos = new javax.swing.JMenu();
+        btn_show_usuarios = new javax.swing.JButton();
+        btn_show_catalogo = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(204, 0, 0));
@@ -114,7 +113,7 @@ public class main extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(7, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -128,6 +127,22 @@ public class main extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Reservas Activas");
 
+        btn_show_usuarios.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_show_usuarios.setText("Usuarios");
+        btn_show_usuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_show_usuariosActionPerformed(evt);
+            }
+        });
+
+        btn_show_catalogo.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        btn_show_catalogo.setText("Catalogo");
+        btn_show_catalogo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_show_catalogoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -135,33 +150,22 @@ public class main extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btn_show_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btn_show_catalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jLabel1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(btn_show_usuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_show_catalogo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
-
-        meni_item_usuarios.setText("Usuarios");
-        meni_item_usuarios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                meni_item_usuariosActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(meni_item_usuarios);
-
-        menu_item_contenidos.setText("Contenido");
-        menu_item_contenidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menu_item_contenidosActionPerformed(evt);
-            }
-        });
-        jMenuBar1.add(menu_item_contenidos);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,6 +206,8 @@ public class main extends javax.swing.JFrame {
     private void btn_salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_salirActionPerformed
         // TODO add your handling code here:
         dispose();
+        login log_in = new login();
+        log_in.setVisible(true);
     }//GEN-LAST:event_btn_salirActionPerformed
 
     private void btn_reservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_reservasActionPerformed
@@ -211,13 +217,21 @@ public class main extends javax.swing.JFrame {
         reserv.setVisible(true);
     }//GEN-LAST:event_btn_reservasActionPerformed
 
-    private void meni_item_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_meni_item_usuariosActionPerformed
+    private void btn_show_usuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_show_usuariosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_meni_item_usuariosActionPerformed
+        this.setVisible(false);
+        
+        form_usuarios usuarios = new form_usuarios();
+        usuarios.setVisible(true);
+    }//GEN-LAST:event_btn_show_usuariosActionPerformed
 
-    private void menu_item_contenidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_item_contenidosActionPerformed
+    private void btn_show_catalogoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_show_catalogoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_menu_item_contenidosActionPerformed
+        this.setVisible(false);
+        
+        form_create_contenido contenido = new form_create_contenido();
+        contenido.setVisible(true);
+    }//GEN-LAST:event_btn_show_catalogoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,17 +271,16 @@ public class main extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_reservas;
     private javax.swing.JButton btn_salir;
+    private javax.swing.JButton btn_show_catalogo;
+    private javax.swing.JButton btn_show_usuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JMenu meni_item_usuarios;
-    private javax.swing.JMenu menu_item_contenidos;
     private javax.swing.JTable table_catalogo;
     // End of variables declaration//GEN-END:variables
 }
